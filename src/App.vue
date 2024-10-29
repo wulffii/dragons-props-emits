@@ -42,28 +42,21 @@
 
   <!-- 9. Style det grundlæggende, men brug IKKE for lang tid på styling, det KUNNE se sådan her ud: https://prnt.sc/spZH-GvZ4r5E -->
 
-  <!-- 10. Anvend til sidst v-model til at binde text-input feltet til en reaktiv variabel (state) som du skal lave, kald den f.eks. newName -->
-
   <!--  -->
   <!-- Del 2: emits -->
   <!--  -->
 
-  <!-- 11. Opsæt nu en eventlistener på formularen i DragonComp der lytter efter submit som kører en funktion "handleSubmit" -->
+  <!-- 10. Det er blevet rigtigt nemt at opdatere en PARENT komponent med indholdet fra en formular, læs og forstå det her: https://escuelavue.es/en/devtips/vue-3-modelvalue-definemodel-macro -->
 
-  <!-- 12. Lav handleSumbit og sørg for at den emitter en custom-event der hedder f.eks. "updateName" - sørg for at DragonComp "ved" at I vil emitte...hvordan fortæller man den det? Selve funktionen behøver i FØRSTE omgang ikke gøre andet end at emitte -->
+  <!-- 11. Anvend v-model (nogenlunde) som i artiklen sådan at når I ændrer dragens navn i childcomponent, bliver det opdateret i App.vue. I skal i App.vue anvende v-model til at binde til navnet i dragedata  -->
 
-  <!-- 13. Lyt nu denne custom event i App.vue og kald en funktion når den indtræder, log til konsol i denne funktion -->
+  <!-- 12. Ekstra/evt: lav en mulighed for at delete dragerne i DragonComp. Så de sender en anden custom event og App.vue fjerner den relevante drage fra state - hjælp i de kommende trin. Se her: https://youtu.be/uXvypD2gPjw -->
 
-  <!-- 14. Udbyg nu DragonComp til at sende det nye navn (newName ref'en vi lavede i step 10) SAMT dragens id i payload i handleSubmit -->
+  <!-- 13. Opsæt en deleteknap og opsæt eventlistener på den der kalder en funktion: handleDelete -->
 
-  <!-- 15. Modtag nu payload(s) i App.vue og log dem -->
+  <!-- 14. handleDelete skal emitte en custom event (deleteDragon) OG sende dragens ID som payload -->
 
-  <!-- 16. Udbyg nu i App.vue så:
-        - Den korrekte drage findes ud fra det id der er sendt i payload (anvend .find(): https://www.w3schools.com/jsref/jsref_find.asp)
-        - Denne drages name skal nu opdateres med det name der er sendt i payload fra DragonComp
-  -->
-
-  <!-- 17. Ekstra/evt: lav en mulighed for at delete dragerne i DragonComp. Så de sender en anden custom event og App.vue fjerner den relevante drage fra state. Se her: https://youtu.be/uXvypD2gPjw -->
+  <!-- 15. I app.vue skal DragonComp nu lytte efter deleteDragon eventet og håndtere dette. Den skal bruge id'et fra den drage der skal slettes og slette den rigtige drage i listen med drager i state i App.vue. Her kan man anvende .filter() metoden -->
 
   <header>
     <h1>D&D website</h1>
