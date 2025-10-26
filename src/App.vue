@@ -9,9 +9,9 @@
 
   <!-- 1. Importer dragerne og gem dem i state (reactive state...hvad skal vi huske at importere for at gøre data reactive?) - de ligger i assets/dragons.js -->
 
-  <!-- 2. I App.vue i <h2> sørg for tallen indsættes dynamisk: se eksempel her: https://prnt.sc/XTygZonF7YCX -->
+  <!-- 2. I App.vue i <h2> sørg for tallet indsættes dynamisk istedet for hardcodet 8-tal -->
 
-  <!-- 3. Lav nu en childcomponent: DragonComp.vue inde i "assets/components"-mappen -->
+  <!-- 3. Lav nu en childcomponent: DragonComp.vue inde i "/components"-mappen - den skal se ca sådan her ud  https://prnt.sc/_NWzYDSKJ0aK  -->
 
   <!-- 4. Importér din nye childcomponent i App.vue -->
 
@@ -23,9 +23,6 @@
    - Gøre på den mest kedelige og usexede måde: 
       <p>Den her drage hedder {{ props.dragonProps.name }} og er {{ props.dragonPoops.age }}</p>
 
-   - Gøre det med destructuring: 
-      const {name, age} = props.dragonProps
-      <p>Den her drage hedder {{ name }} og er {{ age }}</p>
 
    - Gøre det på den FEDE måde hvor vi hiver reactive props ud (selvom vi ikke skal bruge det til noget her...):
       import {toRefs} from "vue"; //https://vuejs.org/api/reactivity-utilities.html#torefs
@@ -40,23 +37,31 @@
     <input type="submit" value="Update name" />
   </form> -->
 
-  <!-- 9. Style det grundlæggende, men brug IKKE for lang tid på styling, det KUNNE se sådan her ud: https://prnt.sc/spZH-GvZ4r5E -->
+  <!-- 9. Style det grundlæggende, men brug IKKE for lang tid på styling, det KUNNE se sådan her ud: https://prnt.sc/_NWzYDSKJ0aK -->
 
   <!--  -->
   <!-- Del 2: emits -->
   <!--  -->
 
-  <!-- 10. Det er blevet rigtigt nemt at opdatere en PARENT komponent med indholdet fra en formular, læs og forstå det her: https://escuelavue.es/en/devtips/vue-3-modelvalue-definemodel-macro -->
+  <!-- 10. Gør nu sådan at når I ændrer dragens navn i childcomponent, bliver det opdateret i App.vue. Se de næste fem trin (11-15) -->
 
-  <!-- 11. Anvend v-model (nogenlunde) som i artiklen sådan at når I ændrer dragens navn i childcomponent, bliver det opdateret i App.vue. I skal i App.vue anvende v-model til at binde til navnet i dragedata  -->
+  <!-- 11. Lav state der holder hvad dragens nye navn er og bind dette til input i <form> -->
 
-  <!-- 12. Ekstra/evt: lav en mulighed for at delete dragerne i DragonComp. Så de sender en anden custom event og App.vue fjerner den relevante drage fra state - hjælp i de kommende trin. Se her: https://youtu.be/uXvypD2gPjw -->
+  <!-- 12. Opsæt nu en defineEmit macro og find på et custom event-navn der om lidt skal bruges -->
 
-  <!-- 13. Opsæt en deleteknap og opsæt eventlistener på den der kalder en funktion: handleDelete -->
+  <!-- 13. Sørg for at form har en eventlistener der lytter efter submit og sørger for ikke at opdatere siden, hvordan gør man det? Når der submittes kaldes en funktion -->
 
-  <!-- 14. handleDelete skal emitte en custom event (deleteDragon) OG sende dragens ID som payload -->
+  <!-- 14.  I funktionen skal der emittes den event vi har navngivet, sørg for at medsende det nye navn OG id -->
 
-  <!-- 15. I app.vue skal DragonComp nu lytte efter deleteDragon eventet og håndtere dette. Den skal bruge id'et fra den drage der skal slettes og slette den rigtige drage i listen med drager i state i App.vue. Her kan man anvende .filter() metoden -->
+  <!-- 15: I App.vue skal der lyttes efter det nye custom event, laves en funktion der tager imod det nye navn og id og opdaterer den rigtige drage  -->
+
+  <!-- 16. Ekstra/evt: lav en mulighed for at delete dragerne i DragonComp. Så de sender en anden custom event og App.vue fjerner den relevante drage fra state - hjælp i de kommende trin. Se her: https://youtu.be/uXvypD2gPjw -->
+
+  <!-- 17. Opsæt en deleteknap og opsæt eventlistener på den der kalder en funktion: handleDelete -->
+
+  <!-- 18. handleDelete skal emitte en custom event (deleteDragon) OG sende dragens ID som payload -->
+
+  <!-- 19. I app.vue skal DragonComp nu lytte efter deleteDragon eventet og håndtere dette. Den skal bruge id'et fra den drage der skal slettes og slette den rigtige drage i listen med drager i state i App.vue. Her kan man anvende .filter() metoden -->
 
   <header>
     <h1>D&D website</h1>
@@ -74,7 +79,8 @@
 header {
   text-align: center;
   min-height: 60vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("@/assets/img/bg_dragon.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)),
+    url("@/assets/img/bg_dragon.jpg");
   background-size: cover;
   display: grid;
   place-content: center;
